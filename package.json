@@ -20,6 +20,6 @@
     "delete-file": "for i in $npm_package_config_deletefile; do rm $i;done",
     "compress-jpg": "sips -s format jpeg sips -s formatOptions  80% $npm_package_config_pathjpg",
 
-    "opti": "npm run png-to-jpg && npm run rename-jpg && npm run delete-file && npm run resize-same-width && npm run compress-jpg"
+    "opti": "npm run png-to-jpg && npm run rename-extension-to-jpg && npm run delete-file && npm run resize-same-width && npm run compress-jpg"
   }
 }
