@@ -1,35 +1,25 @@
 {
   "config": {
     "pngquant": "node_modules/pngquant",
-    "pathpng": "assets/*/*.png",
-    "pathjpg": "assets/*/*.jpg",
-    "deletefile": "assets/*/*.png",
+    "pathpng": "assets/*.png",
+    "pathjpg": "assets/*.jpg",
+    "deletefile": "assets/*.png"
   },
+
   "devDependencies": {
     "imagemin": "^5.3.1",
     "pngquant": "^1.3.0"
   },
-  "scripts": {
-    "opti-all-png": "for i in $npm_package_config_pathpng; do imagemin -P $npm_package_config_pngquant $i > $npm_package_config_dist$i;done",
-    "png-to-jpg": "for i in $npm_package_config_pathpng; do sips -s format jpeg sips -s formatOptions 99% $i --out $i.jpg;done",
-    "rename-jpg": "for i in $npm_package_config_pathpng.jpg; do mv $i ${i/.png/};done",
-    "rename-png": "for i in $npm_package_config_pathjpg.png; do mv $i ${i/.png/};done",
-    "resize-same-width": "for i in $npm_package_config_pathjpg; do sips --resampleWidth 1000 $i;done",
-    "deletefile": "for i in $npm_package_config_deletefile; do rm $i;done",
-    "small-jpg": "sips -s format jpeg sips -s formatOptions  80% $npm_package_config_pathjpg",
 
-    "opti": "npm run png-to-jpg && npm run rename-jpg && npm run deletefile && npm run resize-same-width && npm run small-jpg"
-  },
-  "name": "Asset Optimisations",
-  "version": "1.0.0",
-  "description": "some very useful command lines to optimise assets quickly",
-  "main": "npm run",
-  "dependencies": {
-    "imagemin": "^5.3.1"
-  },
-  "keywords": [
-    "visual design, assets, optimisation, jpg, png, gif, compression"
-  ],
-  "author": "Julien Pecorino",
-  "license": "ISC"
+  "scripts": {
+    "optimise-png": "for i in $npm_package_config_pathpng; do imagemin -P $npm_package_config_pngquant $i > $npm_package_config_dist$i;done",
+    "png-to-jpg": "for i in $npm_package_config_pathpng; do sips -s format jpeg sips -s formatOptions 99% $i --out $i.jpg;done",
+    "rename-extension-to-jpg": "for i in $npm_package_config_pathpng.jpg; do mv $i ${i/.png/};done",
+    "rename-extension-to-png": "for i in $npm_package_config_pathjpg.png; do mv $i ${i/.png/};done",
+    "resize-same-width": "for i in $npm_package_config_pathjpg; do sips --resampleWidth 1000 $i;done",
+    "delete-file": "for i in $npm_package_config_deletefile; do rm $i;done",
+    "compress-jpg": "sips -s format jpeg sips -s formatOptions  80% $npm_package_config_pathjpg",
+
+    "opti": "npm run png-to-jpg && npm run rename-jpg && npm run delete-file && npm run resize-same-width && npm run compress-jpg"
+  }
 }
