@@ -3,6 +3,7 @@
     "pngquant": "node_modules/pngquant",
     "pathpng": "assets/*/*.png",
     "pathjpg": "assets/*/*.jpg",
+    "deletefile": "assets/*/*.png",
   },
   "devDependencies": {
     "imagemin": "^5.3.1",
@@ -13,11 +14,11 @@
     "png-to-jpg": "for i in $npm_package_config_pathpng; do sips -s format jpeg sips -s formatOptions 99% $i --out $i.jpg;done",
     "rename-jpg": "for i in $npm_package_config_pathpng.jpg; do mv $i ${i/.png/};done",
     "rename-png": "for i in $npm_package_config_pathjpg.png; do mv $i ${i/.png/};done",
-    "resize": "for i in $npm_package_config_pathjpg; do sips --resampleWidth 100 $i;done",
-    "deletepng": "for i in $npm_package_config_pathpng; do rm $i;done",
-    "small-jpg": "sips -s format jpeg sips -s formatOptions  2% $npm_package_config_pathjpg",
+    "resize-same-width": "for i in $npm_package_config_pathjpg; do sips --resampleWidth 1000 $i;done",
+    "deletefile": "for i in $npm_package_config_deletefile; do rm $i;done",
+    "small-jpg": "sips -s format jpeg sips -s formatOptions  80% $npm_package_config_pathjpg",
 
-    "opti": "npm run png-to-jpg && npm run rename-jpg && npm run delete && npm run resize && npm run small-jpg"
+    "opti": "npm run png-to-jpg && npm run rename-jpg && npm run deletefile && npm run resize-same-width && npm run small-jpg"
   },
   "name": "Asset Optimisations",
   "version": "1.0.0",
