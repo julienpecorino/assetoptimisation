@@ -1,29 +1,27 @@
 {
   "config": {
     "pngquant": "node_modules/pngquant",
-    "pathpng":"assets/*/*.png",
-    "pathjpg":"assets/*/*.jpg",
-    "dist":"ready/"
+    "pathpng": "assets/*/*.png",
+    "pathjpg": "assets/*/*.jpg",
   },
   "devDependencies": {
-    "imagemin": "latest"
+    "imagemin": "^5.3.1",
+    "pngquant": "^1.3.0"
   },
   "scripts": {
     "opti-all-png": "for i in $npm_package_config_pathpng; do imagemin -P $npm_package_config_pngquant $i > $npm_package_config_dist$i;done",
     "png-to-jpg": "for i in $npm_package_config_pathpng; do sips -s format jpeg sips -s formatOptions 99% $i --out $i.jpg;done",
     "rename-jpg": "for i in $npm_package_config_pathpng.jpg; do mv $i ${i/.png/};done",
     "rename-png": "for i in $npm_package_config_pathjpg.png; do mv $i ${i/.png/};done",
-    "resize":"for i in $npm_package_config_pathjpg; do sips --resampleWidth 100 $i;done",
+    "resize": "for i in $npm_package_config_pathjpg; do sips --resampleWidth 100 $i;done",
     "deletepng": "for i in $npm_package_config_pathpng; do rm $i;done",
     "small-jpg": "sips -s format jpeg sips -s formatOptions  2% $npm_package_config_pathjpg",
-    "replace-jpg": "for i in $npm_package_config_pathjpg; do mv $i $npm_package_config_dist$i;done",
-    "replace-png": "for i in $npm_package_config_pathpng; do mv $i $npm_package_config_dist$i;done",
-    
+
     "opti": "npm run png-to-jpg && npm run rename-jpg && npm run delete && npm run resize && npm run small-jpg"
   },
-  "name": "designtool",
+  "name": "Asset Optimisations",
   "version": "1.0.0",
-  "description": "ddd",
+  "description": "some very useful command lines to optimise assets quickly",
   "main": "npm run",
   "dependencies": {
     "imagemin": "^5.3.1"
