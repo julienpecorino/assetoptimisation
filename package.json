@@ -1,0 +1,36 @@
+{
+  "config": {
+    "pngquant": "node_modules/pngquant",
+    "pathpng":"assets/*/*.png",
+    "pathjpg":"assets/*/*.jpg",
+    "dist":"ready/"
+  },
+  "devDependencies": {
+    "imagemin": "latest"
+  },
+  "scripts": {
+    "opti-all-png": "for i in $npm_package_config_pathpng; do imagemin -P $npm_package_config_pngquant $i > $npm_package_config_dist$i;done",
+    "png-to-jpg": "for i in $npm_package_config_pathpng; do sips -s format jpeg sips -s formatOptions 99% $i --out $i.jpg;done",
+    "rename-jpg": "for i in $npm_package_config_pathpng.jpg; do mv $i ${i/.png/};done",
+    "rename-png": "for i in $npm_package_config_pathjpg.png; do mv $i ${i/.png/};done",
+    "resize":"for i in $npm_package_config_pathjpg; do sips --resampleWidth 100 $i;done",
+    "deletepng": "for i in $npm_package_config_pathpng; do rm $i;done",
+    "small-jpg": "sips -s format jpeg sips -s formatOptions  2% $npm_package_config_pathjpg",
+    "replace-jpg": "for i in $npm_package_config_pathjpg; do mv $i $npm_package_config_dist$i;done",
+    "replace-png": "for i in $npm_package_config_pathpng; do mv $i $npm_package_config_dist$i;done",
+    
+    "opti": "npm run png-to-jpg && npm run rename-jpg && npm run delete && npm run resize && npm run small-jpg"
+  },
+  "name": "designtool",
+  "version": "1.0.0",
+  "description": "ddd",
+  "main": "npm run",
+  "dependencies": {
+    "imagemin": "^5.3.1"
+  },
+  "keywords": [
+    "visual design, assets, optimisation, jpg, png, gif, compression"
+  ],
+  "author": "Julien Pecorino",
+  "license": "ISC"
+}
