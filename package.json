@@ -16,6 +16,7 @@
     "png-to-jpg": "for i in $npm_package_config_path/*.png; do sips -s format jpeg sips -s formatOptions 99% $i --out $i.jpg;done",
     "rename": "num=0; for i in $npm_package_config_path/*.jpg; do mv $i $npm_package_config_path/filenamehere$(printf '%01d' $num).${i#*.}; ((num++)); done",
     "format-name": "renamer --find ' ' --replace '' $npm_package_config_path/*/'**'",
+    "name-to-lowercase": "renamer --regex --find '[a-zA-Z0-9_]' --replace '' $npm_package_config_path/*/'**'",
     "cut-off-name": "for i in $npm_package_config_path/*.jpg; do mv $i ${i/.png/};done",
     "resize-same-width": "for i in $npm_package_config_path/*.jpg; do sips --resampleWidth $npm_package_config_dimension $i;done",
     "resize-same-hieght": "for i in $npm_package_config_path/*.jpg; do sips --resampleHeight $npm_package_config_dimension $i;done",
