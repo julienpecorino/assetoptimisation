@@ -1,9 +1,9 @@
 {
   "config": {
     "pngquant": "node_modules/pngquant",
-    "pathpng": "assets/*.png",
-    "pathjpg": "assets/*.jpg",
-    "deletefile": "assets/*.png"
+    "path":"assets",
+    "dimension":"1000",
+    "quality":"80%"
   },
 
   "devDependencies": {
@@ -12,13 +12,22 @@
   },
 
   "scripts": {
-    "optimise-png": "for i in $npm_package_config_pathpng; do imagemin -P $npm_package_config_pngquant $i > $npm_package_config_dist$i;done",
-    "png-to-jpg": "for i in $npm_package_config_pathpng; do sips -s format jpeg sips -s formatOptions 99% $i --out $i.jpg;done",
-    "rename-extension-to-jpg": "for i in $npm_package_config_pathpng.jpg; do mv $i ${i/.png/};done",
-    "rename-extension-to-png": "for i in $npm_package_config_pathjpg.png; do mv $i ${i/.png/};done",
-    "resize-same-width": "for i in $npm_package_config_pathjpg; do sips --resampleWidth 1000 $i;done",
-    "delete-file": "for i in $npm_package_config_deletefile; do rm $i;done",
-    "compress-jpg": "sips -s format jpeg sips -s formatOptions  80% $npm_package_config_pathjpg",
+    "optimise-png": "for i in $npm_package_config_path/*.png; do imagemin -P $npm_package_config_pngquant $i > $npm_package_config_dist$i;done",
+    "compress-jpg": "sips -s format jpeg sips -s formatOptions  $npm_package_config_quality $npm_package_config_path/*.jpg",
+
+    "png-to-jpg": "for i in $npm_package_config_path/*.png; do sips -s format jpeg sips -s formatOptions 99% $i --out $i.jpg;done",
+    
+    "rename":"num=0; for i in $npm_package_config_path/*.jpg; do mv $i $npm_package_config_path/filenamehere$(printf '%01d' $num).${i#*.}; ((num++)); done",
+    "cut-off-name": "for i in $npm_package_config_path/*.jpg; do mv $i ${i/.png/};done",
+    "format-name": "for i in $npm_package_config_path/*.jpg; do mv $i `echo $i | tr '-' '_'`; done",
+    
+    "resize-same-width": "for i in $npm_package_config_path/*.jpg; do sips --resampleWidth $npm_package_config_dimension $i;done",
+    "resize-same-hieght": "for i in $npm_package_config_path/*.jpg; do sips --resampleHeight $npm_package_config_dimension $i;done",
+    "resize-max-width-or-hieght":"for i in $npm_package_config_path/*.jpg; do sips -Z $npm_package_config_dimension $i;done",
+    
+    "delete-file": "for i in $npm_package_config_path/*.png; do rm $i;done",
+      
+
 
     "opti": "npm run png-to-jpg && npm run rename-extension-to-jpg && npm run delete-file && npm run resize-same-width && npm run compress-jpg"
   }
