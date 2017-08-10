@@ -1,34 +1,26 @@
 {
   "config": {
     "pngquant": "node_modules/pngquant",
-    "path":"assets",
-    "dimension":"1000",
-    "quality":"80%"
+    "path": "assets",
+    "dimension": "1000",
+    "quality": "80%"
   },
-
   "devDependencies": {
     "imagemin": "^5.3.1",
-    "pngquant": "^1.3.0"
+    "pngquant": "^1.3.0",
+    "renamer": "^0.6.1"
   },
-
   "scripts": {
     "optimise-png": "for i in $npm_package_config_path/*.png; do imagemin -P $npm_package_config_pngquant $i > $npm_package_config_dist$i;done",
     "compress-jpg": "sips -s format jpeg sips -s formatOptions  $npm_package_config_quality $npm_package_config_path/*.jpg",
-
     "png-to-jpg": "for i in $npm_package_config_path/*.png; do sips -s format jpeg sips -s formatOptions 99% $i --out $i.jpg;done",
-    
-    "rename":"num=0; for i in $npm_package_config_path/*.jpg; do mv $i $npm_package_config_path/filenamehere$(printf '%01d' $num).${i#*.}; ((num++)); done",
+    "rename": "num=0; for i in $npm_package_config_path/*.jpg; do mv $i $npm_package_config_path/filenamehere$(printf '%01d' $num).${i#*.}; ((num++)); done",
+    "format-name": "renamer --find ' ' --replace '' $npm_package_config_path/*/'**'",
     "cut-off-name": "for i in $npm_package_config_path/*.jpg; do mv $i ${i/.png/};done",
-    "format-name": "for i in $npm_package_config_path/*.jpg; do mv $i `echo $i | tr '-' '_'`; done",
-    
     "resize-same-width": "for i in $npm_package_config_path/*.jpg; do sips --resampleWidth $npm_package_config_dimension $i;done",
     "resize-same-hieght": "for i in $npm_package_config_path/*.jpg; do sips --resampleHeight $npm_package_config_dimension $i;done",
-    "resize-max-width-or-hieght":"for i in $npm_package_config_path/*.jpg; do sips -Z $npm_package_config_dimension $i;done",
-    
+    "resize-max-width-or-hieght": "for i in $npm_package_config_path/*.jpg; do sips -Z $npm_package_config_dimension $i;done",
     "delete-file": "for i in $npm_package_config_path/*.png; do rm $i;done",
-      
-
-
     "opti": "npm run png-to-jpg && npm run rename-extension-to-jpg && npm run delete-file && npm run resize-same-width && npm run compress-jpg"
   }
 }
