@@ -17,9 +17,9 @@
     "rename": "num=0; for i in $npm_package_config_path/*.jpg; do mv $i $npm_package_config_path/filenamehere$(printf '%01d' $num).${i#*.}; ((num++)); done",
     "format-name": "renamer --find '.png' --replace '' $npm_package_config_path/*/'**'",
     "resize-same-width": "for i in $npm_package_config_path/*.jpg; do sips --resampleWidth $npm_package_config_dimension $i;done",
-    "resize-same-hieght": "for i in $npm_package_config_path/*.jpg; do sips --resampleHeight $npm_package_config_dimension $i;done",
+    "resize-same-height": "for i in $npm_package_config_path/*.jpg; do sips --resampleHeight $npm_package_config_dimension $i;done",
     "resize-w-or-h": "for i in $npm_package_config_path/*.jpg; do sips -Z $npm_package_config_dimension $i;done",
     "delete-file": "for i in $npm_package_config_path/*.png; do rm $i;done",
-    "opti": "npm run png-to-jpg && npm run rename-extension-to-jpg && npm run delete-file && npm run resize-same-width && npm run compress-jpg"
+    "do-all": "npm run png-to-jpg && npm run rename-extension-to-jpg && npm run delete-file && npm run resize-same-width && npm run compress-jpg"
   }
 }
