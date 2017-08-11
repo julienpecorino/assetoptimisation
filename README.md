@@ -1,13 +1,15 @@
-# Assets Optimisations
+# Asset Optimisations
 Some really usful command lines for: 
 
-😎 Converting .png ot .jpg
+😎 Converting .png or .jpg
+
+😎 Formating files name
 
 😎 Renaming files
 
 😎 Resizing file
 
-😎 Compressing...
+🤜 Compressing png or jpg
 
-This is using strayghtaway npm as task runner (no need grunt or gulp), to use a command simply type: ‘npm run rename-file’.
-The scripts are inside the package.json, don’t forget to do: ’npm install’ to dowload all dependencies.
+This is using npm as task runner (no need grunt or gulp), to use it, type the command: ‘npm run rename-file’.
+Scripts are inside the package.json, don’t forget to do: ’npm install’ to dowload all dev dependencies.
