@@ -1,5 +1,5 @@
 # Asset Optimisations
-Some really usful command lines for: 
+Some really useful command lines for: 
 
 😎 Converting .png or .jpg
 
